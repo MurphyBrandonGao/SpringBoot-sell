@@ -13,6 +13,7 @@ import com.action.exception.SellException;
 import com.action.repository.OrderDetailRepository;
 import com.action.repository.OrderMasterRepository;
 import com.action.service.OrderService;
+import com.action.service.PayService;
 import com.action.service.ProductService;
 import com.action.utils.KeyUtil;
 import com.mysql.jdbc.jmx.LoadBalanceConnectionGroupManager;
@@ -49,6 +50,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+
+    @Autowired
+    private PayService payService;
 
     @Override
     @Transactional
@@ -150,8 +154,7 @@ public class OrderServiceImpl implements OrderService {
 
         // 4.如果已支付，需要退款
         if (orderDTO.getOrderStatus().equals(PayStatusEnum.SUCCESS.getCode())) {
-            // TODO
-
+            payService.refound(orderDTO);
         }
         return orderDTO;
     }
@@ -159,9 +162,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public OrderDTO finish(OrderDTO orderDTO) {
-        // 1.判断订单状态
+        // 1.判断订单状态，排除非新建状态
         if (!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())) {
-            log.error("【完结订单】订单状态，orderId={},orderStatus={}", orderDTO.getOrderId(), orderDTO.getOrderStatus());
+            log.error("【完结订单】订单状态不正确，orderId={},orderStatus={}", orderDTO.getOrderId(), orderDTO.getOrderStatus());
             throw new SellException(ResultEnum.ORDER_STATE_ERROR);
         }
 
@@ -203,5 +206,12 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return orderDTO;
+    }
+
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTO.convert(orderMasterPage.getContent());
+        return new PageImpl<>(orderDTOList, pageable, orderMasterPage.getTotalElements());
     }
 }
