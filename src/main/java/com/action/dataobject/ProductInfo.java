@@ -1,5 +1,7 @@
 package com.action.dataobject;
 
+import com.action.enums.ProductStatusEnum;
+import com.action.utils.EnumUtil;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -45,18 +47,20 @@ public class ProductInfo implements Serializable {
      **/
     private String productIcon;
 
-    private Integer productStatus;
-
-    ///**状态，0正常，1下架**/
-    //private Integer productStatus = ProductStatusEnum.UP.getCode();
+    /**状态，0正常，1下架**/
+    private Integer productStatus = ProductStatusEnum.UP.getCode();
 
     /**
      * 类目编号
      **/
     private Integer categoryType;
 
-    //private Date createTime;
-    //
-    //private Date updateTime;
+    private Date createTime;
+
+    private Date updateTime;
+
+    public ProductStatusEnum getProductStatusEnum() {
+        return EnumUtil.getByCode(productStatus, ProductStatusEnum.class);
+    }
 
 }
