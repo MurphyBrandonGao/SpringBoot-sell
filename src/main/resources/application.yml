@@ -10,6 +10,9 @@ spring:
     default-property-inclusion: non_null
   server:
     context-path: /sell
+  redis:
+    host: 127.0.0.1
+    port: 6379
 
 # 下面是微信相关的配置
 wechat:

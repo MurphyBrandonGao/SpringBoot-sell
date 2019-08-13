@@ -2,12 +2,17 @@ package com.action.VO;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author Dell
  * @create 2019-08-07 21:42
  */
 @Data
-public class ResultVO<T> {
+public class ResultVO<T> implements Serializable {
+
+
+
     /**
      * 错误码
      */

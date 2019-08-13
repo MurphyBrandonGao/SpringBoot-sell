@@ -79,6 +79,7 @@
     </div>
 </div>
 
+<#--弹窗-->
 <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -106,26 +107,28 @@
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>
-    var websocket=null;
-    if('WebSocket' in window){
-        websocket=new WebSocket('ws://sqmax.natapp1.cc/sell/webSocket');
-    }else{
+    var websocket = null;
+    if('WebSocket' in window) {
+        websocket = new WebSocket('ws://sqmax.natapp1.cc/sell/webSocket');
+    } else {
         alert('该浏览器不支持websocket');
     }
-    websocket.onopen=function (ev) {
+
+
+    websocket.onopen = function (ev) {
         console.log('建立连接');
     }
-    websocket.onclose=function (ev) {
+    websocket.onclose = function (ev) {
         console.log('连接关闭');
     }
-    websocket.onmessage=function (ev) {
-        console.log('收到消息：'+ev.data);
+    websocket.onmessage = function (ev) {
+        console.log('收到消息：' + ev.data);
         //弹窗提醒，播放消息
         $('#myModal').modal('show');
 
         document.getElementById('notice').play();
     }
-    window.onbeforeunload=function (ev) {
+    window.onbeforeunload = function (ev) {
         websocket.close();
     }
 </script>

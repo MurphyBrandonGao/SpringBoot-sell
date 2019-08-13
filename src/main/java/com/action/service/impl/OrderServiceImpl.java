@@ -9,29 +9,24 @@ import com.action.dto.OrderDTO;
 import com.action.enums.OrderStatusEnum;
 import com.action.enums.PayStatusEnum;
 import com.action.enums.ResultEnum;
+import com.action.exception.ResponseBankException;
 import com.action.exception.SellException;
 import com.action.repository.OrderDetailRepository;
 import com.action.repository.OrderMasterRepository;
-import com.action.service.OrderService;
-import com.action.service.PayService;
-import com.action.service.ProductService;
+import com.action.service.*;
 import com.action.utils.KeyUtil;
-import com.mysql.jdbc.jmx.LoadBalanceConnectionGroupManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import javax.crypto.MacSpi;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,6 +49,12 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private PayService payService;
 
+    @Autowired
+    private PushMessageService pushMessageService;
+
+    @Autowired
+    private WebSocket webSocket;
+
     @Override
     @Transactional
     public OrderDTO create(OrderDTO orderDTO) {
@@ -66,9 +67,10 @@ public class OrderServiceImpl implements OrderService {
         // 1. 查询商品（数量，价格）
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
             ProductInfo productInfo = productService.findOne(orderDetail.getProductId());
-            if (productInfo == null)
-                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
-
+            if (productInfo == null) {
+                //throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+                throw new ResponseBankException();
+            }
             // 2. 计算订单总价
             orderAmount = productInfo.getProductPrice()
                     .multiply(new BigDecimal(orderDetail.getProductQuantity())).add(orderAmount);
@@ -93,6 +95,10 @@ public class OrderServiceImpl implements OrderService {
         List<CartDTO> cartDTOList =
         orderDTO.getOrderDetailList().stream().map(e -> new CartDTO(e.getProductId(), e.getProductQuantity())).collect(Collectors.toList());
         productService.decreaseStock(cartDTOList);
+
+        // 发送webSocket消息
+        webSocket.sendMessage(orderDTO.getOrderId());
+
         return orderDTO;
     }
 
@@ -177,6 +183,9 @@ public class OrderServiceImpl implements OrderService {
             log.error("【完结订单失败】更新失败，orderMaster={}", orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FATAL);
         }
+
+        // 推送模板消息
+        pushMessageService.orderStatus(orderDTO);
 
         return orderDTO;
     }
