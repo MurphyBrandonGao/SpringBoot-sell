@@ -18,7 +18,10 @@ import java.util.Date;
 @Entity
 @Data
 @DynamicUpdate
-public class ProductInfo implements Serializable {
+public class ProductInfo {
+
+    private static final long serialVersionUID = 3444372857205574860L;
+
     @Id
     private String productId;
 

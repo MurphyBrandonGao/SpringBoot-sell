@@ -8,11 +8,11 @@ spring:
     show-sql: true
   jackson:
     default-property-inclusion: non_null
-  server:
-    context-path: /sell
   redis:
-    host: 127.0.0.1
+    host: 192.168.31.133
     port: 6379
+server:
+  context-path: /sell
 
 # 下面是微信相关的配置
 wechat:

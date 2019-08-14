@@ -11,8 +11,7 @@ import java.io.Serializable;
 @Data
 public class ResultVO<T> implements Serializable {
 
-
-
+    private static final long serialVersionUID = -8180236900783103375L;
     /**
      * 错误码
      */
