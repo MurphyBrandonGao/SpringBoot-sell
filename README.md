@@ -50,9 +50,9 @@
 ### 功能模块划分
 
 - 功能分析 
-  ![](https://github.com/gb145234/SpringBoot-sell/blob/master/sell/35.jpg)
+- ![](https://github.com/gb145234/SpringBoot-sell/blob/master/sell/35.jpg)
 - 关系图 
-  ![36.png](https://github.com/gb145234/SpringBoot-sell/blob/master/sell/36.jpg)
+- ![36.png](https://github.com/gb145234/SpringBoot-sell/blob/master/sell/36.jpg)
 
 ### 部署架构
 
@@ -117,6 +117,7 @@
 ![26.png](https://github.com/gb145234/SpringBoot-sell/blob/master/sell/26.jpg)
 
 点击商品->新增来新增商品 
+
 ![23.png](https://github.com/gb145234/SpringBoot-sell/blob/master/sell/23.jpg)
 
 ### 买家端（手机微信端）
