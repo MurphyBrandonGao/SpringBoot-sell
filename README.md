@@ -32,7 +32,7 @@
 
 - 前端是由Vue.js构建的WebApp，后端由Spring Boot打造，后端的前台页面使用Bootstrap+Freemarker+JQuery构建,后端和前端通过RESTful风格的接口相连。
 
-![](C:\Users\dell\Pictures\Myblog\34.jpg)
+![](C:\Users\dell\Pictures\Myblog\2343433434.jpg)
 
 - 数据库方面使用Spring Boot+JPA，兼顾Spring Boot+Mybatis；缓存方面，使用Spring Boot+Redis；基于Redis，应对分布式Session和分布式锁；消息推送方面，使用WebSocket。
 
