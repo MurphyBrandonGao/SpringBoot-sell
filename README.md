@@ -179,7 +179,7 @@
 
 ## 访问买家的前端界面
 
-1. 双击nginx.exe启动nginx服务器，如果已启动过，命令行进入nginx的根目录，输入`nginx -s reload`重启nginx服务器。
+1. 项目的前后端是完全分离的，买家端前端的代码在另一个仓库，使用`git clone https://github.com/gb145234/vue-project.git`下载前端项目，其中项目根路径（vuejs-project）下的dist目录就是前端编译后的代码。
 
 2. 修改nginx的配置文件，让nginx可以找到前端代码。在nginx根目录下的conf目录下有一个nginx.conf文件，它就是我们要修改的配置文件，其中有下面一段：
 
