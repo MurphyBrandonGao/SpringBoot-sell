@@ -1,7 +1,6 @@
 package com.action.repository;
 
 import com.action.dataobject.ProductCategory;
-import lombok.Data;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +17,7 @@ import java.util.List;
  * @create 2019-08-07 17:24
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ProductCategoryRepositoryTest {
 
     @Autowired
@@ -28,6 +27,7 @@ public class ProductCategoryRepositoryTest {
     public void findOneTest() {
         ProductCategory productCategory = repository.findOne(1);
         System.out.println(productCategory.toString());
+        Assert.assertNotEquals(productCategory, null);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class ProductCategoryRepositoryTest {
         ProductCategory productCategory = new ProductCategory("男生最爱", 8);
         ProductCategory result = repository.save(productCategory);
         Assert.assertNotNull(result);
-        //Assert.assertNotEquals(null, result);
+        Assert.assertNotEquals(null, result);
     }
 
     @Test

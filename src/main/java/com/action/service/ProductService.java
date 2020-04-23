@@ -17,16 +17,17 @@ public interface ProductService {
 
     /**
      * 查询所有在架商品列表
-     * @return
+     * @return 所有商品列表
      */
     List<ProductInfo> findUpAll();
 
     /**
      * 查询某一页商品
-     * @param pageable
-     * @return
+     * @param pageable 分页
+     * @return 某一页商品
      */
     Page<ProductInfo> findAll(Pageable pageable);
+
     ProductInfo save(ProductInfo productInfo);
 
     // 加库存

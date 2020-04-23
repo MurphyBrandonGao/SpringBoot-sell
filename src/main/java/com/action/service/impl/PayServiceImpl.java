@@ -56,8 +56,6 @@ public class PayServiceImpl implements PayService {
 
         // 3.支付的金额
         // 4.支付的人（下单人 == 支付人）
-
-
         PayResponse payResponse = bestPayService.asyncNotify(notifyData);
         log.info("【微信支付】异步通知, payResponse={}", JsonUtil.toJson(payResponse));
 
@@ -71,7 +69,7 @@ public class PayServiceImpl implements PayService {
         }
 
         // 判断微信通知金额与系统金额是否一致
-        if (MathUtil.equals(payResponse.getOrderAmount(), orderDTO.getOrderAmount().doubleValue())) {
+        if (!MathUtil.equals(payResponse.getOrderAmount(), orderDTO.getOrderAmount().doubleValue())) {
             log.error("【微信支付】异步通知，订单金额不一致，微信通知金额={}，系统金额={}",
                     payResponse.getOrderAmount(), orderDTO.getOrderAmount());
             throw new SellException(ResultEnum.WXPAY_NOTIFY_MONEY_VERTIFY_ERROR);
@@ -85,7 +83,7 @@ public class PayServiceImpl implements PayService {
 
     /**
      * 退款
-     * @param orderDTO
+     * @param orderDTO 订单传输对象
      */
     @Override
     public RefundResponse refound(OrderDTO orderDTO) {

@@ -12,33 +12,21 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-md-12 column">
-                    <table class="table table-bordered table-condensed">
-                        <thead>
-                        <tr>
-                            <th>类目</th>
-                            <th>名字</th>
-                            <th>type</th>
-                            <th>创建时间</th>
-                            <th>修改时间</th>
-                            <th colspan="2">操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    <form role="form" method="post" action="/sell/seller/category/save">
+                        <div class="form-group">
+                            <label>名字</label>
+                            <input name="categoryName" class="form-control" type="text" value="${(category.categoryName)!''}"/>
+                        </div>
+                        <div class="form-group">
+                            <label>type</label>
+                            <input name="categoryType" type="number" class="form-control" value="${(category.categoryType)!''}"/>
+                        </div>
 
-                        <#list categoryList as category>
-                        <tr>
-                            <td>${category.categoryId}</td>
-                            <td>${category.categoryName}</td>
-                            <td>${category.categoryType}</td>
-                            <td>${category.createTime}</td>
-                            <td>${category.updateTime}</td>
-                            <td><a href="/sell/seller/category/index?categoryId=${category.categoryId}">修改</a></td>
-                        </tr>
-                        </#list>
-                        </tbody>
-                    </table>
+                        <input hidden type="text" name="categoryId" value="${(category.categoryId)!''}">
+
+                        <button type="submit" class="btn btn-default">提交</button>
+                    </form>
                 </div>
-
             </div>
         </div>
     </div>

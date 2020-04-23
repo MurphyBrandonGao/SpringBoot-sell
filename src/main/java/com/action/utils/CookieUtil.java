@@ -14,10 +14,10 @@ import java.util.Map;
 public class CookieUtil {
     /**
      * 设置cookie
-     * @param response
-     * @param name
-     * @param value
-     * @param maxAge
+     * @param response http响应
+     * @param name cookie名
+     * @param value cookie值
+     * @param maxAge 生存时间
      */
     public static void set(HttpServletResponse response,
                            String name,
@@ -31,9 +31,9 @@ public class CookieUtil {
 
     /**
      * 获取cookie
-     * @param request
-     * @param name
-     * @return
+     * @param request http请求
+     * @param name cookie名
+     * @return cookie
      */
     public static Cookie get(HttpServletRequest request,
                            String name) {
@@ -46,8 +46,8 @@ public class CookieUtil {
 
     /**
      * 将cookie封装成map
-     * @param request
-     * @return
+     * @param request http请求
+     * @return map
      */
     public static Map<String, Cookie> readCookieMap(HttpServletRequest request) {
         Map<String, Cookie> cookieMap = new HashMap<>();

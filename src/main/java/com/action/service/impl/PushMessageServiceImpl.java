@@ -37,7 +37,7 @@ public class PushMessageServiceImpl implements PushMessageService {
         List<WxMpTemplateData> data = Arrays.asList(
                 new WxMpTemplateData("first", "亲，请记得收获"),
                 new WxMpTemplateData("keyword1", "微信点餐"),
-                new WxMpTemplateData("keyword2", "微信点餐"),
+                new WxMpTemplateData("keyword2", "15712363915"),
                 new WxMpTemplateData("keyword3", orderDTO.getOrderId()),
                 new WxMpTemplateData("keyword4", orderDTO.getOrderStatusEnum().getMessage()),
                 new WxMpTemplateData("keyword5", "￥" + orderDTO.getOrderAmount()),
@@ -47,7 +47,7 @@ public class PushMessageServiceImpl implements PushMessageService {
         try {
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
         } catch (WxErrorException e) {
-            log.info("【微信模板消息】发送失败，{}", e);
+            log.error("【微信模板消息】发送失败，{}", e);
         }
     }
 }

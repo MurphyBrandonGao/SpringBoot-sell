@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
  * @create 2019-08-07 20:15
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ProductServiceImplTest {
 
     @Autowired

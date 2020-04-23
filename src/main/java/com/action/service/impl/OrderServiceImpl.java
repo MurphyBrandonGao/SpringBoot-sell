@@ -125,8 +125,7 @@ public class OrderServiceImpl implements OrderService {
 
         List<OrderDTO> orderDTOList = OrderMaster2OrderDTO.convert(orderMasterPage.getContent());
 
-        Page<OrderDTO> orderDTOPage = new PageImpl<OrderDTO>(orderDTOList, pageable, orderMasterPage.getTotalElements());
-        return orderDTOPage;
+        return new PageImpl<>(orderDTOList, pageable, orderMasterPage.getTotalElements());
     }
 
     @Override
@@ -149,7 +148,7 @@ public class OrderServiceImpl implements OrderService {
             log.error("【取消订单】更新失败， orderMaster={}", orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FATAL);
         }
-        // 3.返回库存
+        // 3.返库存
         // 先判断订单详情是否为空
         if (CollectionUtils.isEmpty(orderDTO.getOrderDetailList())) {
             log.error("【取消订单】订单无商品详情，orderDTO", orderDTO);

@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  * @create 2019-08-11 11:15
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Slf4j
 public class PayServiceImplTest {
     @Autowired

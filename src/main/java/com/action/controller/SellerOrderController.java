@@ -33,7 +33,7 @@ public class SellerOrderController {
      * 订单列表
      * @param page 第几页,从第一页开始
      * @param size 一页有多少条数据
-     * @return
+     * @return 视图
      */
     @GetMapping("/list")
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -49,13 +49,13 @@ public class SellerOrderController {
 
     /**
      * 取消订单
-     * @param orderId
-     * @return
+     * @param orderId 订单id
+     * @return 视图
      */
     @GetMapping("/cancel")
     public ModelAndView cancel(@RequestParam("orderId") String orderId,
                                Map<String, Object> map) {
-        OrderDTO orderDTO = null;
+        OrderDTO orderDTO;
         try {
             orderDTO = orderService.findOne(orderId);
             orderService.cancel(orderDTO);
@@ -72,14 +72,13 @@ public class SellerOrderController {
 
     /**
      * 订单详情
-     * @param orderId
-     * @param map
-     * @return
+     * @param orderId 订单id
+     * @return 视图
      */
     @GetMapping("/detail")
     public ModelAndView detail(@RequestParam("orderId") String orderId,
                                Map<String, Object> map) {
-        OrderDTO orderDTO = new OrderDTO();
+        OrderDTO orderDTO;
         try {
             orderDTO = orderService.findOne(orderId);
         } catch (SellException e) {
@@ -89,14 +88,13 @@ public class SellerOrderController {
             return new ModelAndView("common/error", map);
         }
         map.put("orderDTO", orderDTO);
-        return new ModelAndView("common/detail", map);
+        return new ModelAndView("order/detail", map);
     }
 
     /**
      * 完结订单
-     * @param orderId
-     * @param map
-     * @return
+     * @param orderId 订单id
+     * @return 视图
      */
     @GetMapping("/finish")
     public ModelAndView finished(@RequestParam("orderId") String orderId,

@@ -9,7 +9,6 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 //@MapperScan(basePackages = "com.action.dataobject.mapper")
 public class SellApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(SellApplication.class, args);
 	}

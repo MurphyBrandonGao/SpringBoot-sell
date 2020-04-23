@@ -10,7 +10,6 @@ import com.action.utils.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -43,10 +42,9 @@ public class SellerProductionController {
 
     /**
      * 列表
-     * @param page
-     * @param size
-     * @param map
-     * @return
+     * @param page 第几页
+     * @param size 每页多少条数据
+     * @return 视图
      */
     @GetMapping("/list")
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -54,7 +52,7 @@ public class SellerProductionController {
                              Map<String, Object> map) {
         PageRequest pageRequest = new PageRequest(page - 1, size);
         Page<ProductInfo> productInfoPage = productService.findAll(pageRequest);
-        map.put("orderDTOPage", productInfoPage);
+        map.put("productInfoPage", productInfoPage);
         map.put("currentPage", page);
         map.put("size", size);
         return new ModelAndView("product/list", map);
@@ -62,11 +60,10 @@ public class SellerProductionController {
 
     /**
      * 商品上架
-     * @param productId
-     * @param map
-     * @return
+     * @param productId 商品id
+     * @return 视图
      */
-    @RequestMapping("/on_Sale")
+    @GetMapping("/on_sale")
     public ModelAndView onSale(@RequestParam("productId") String productId,
                                Map<String, Object> map) {
         try {
@@ -82,11 +79,10 @@ public class SellerProductionController {
 
     /**
      * 商品下架
-     * @param productId
-     * @param map
-     * @return
+     * @param productId 商品id
+     * @return 视图
      */
-    @RequestMapping("/off_Sale")
+    @GetMapping("/off_sale")
     public ModelAndView offSale(@RequestParam("productId") String productId,
                                Map<String, Object> map) {
         try {
@@ -102,9 +98,8 @@ public class SellerProductionController {
 
     /**
      * 添加商品信息（没传商品ID）、修改商品信息（传商品ID）
-     * @param productId
-     * @param map
-     * @return
+     * @param productId 商品id
+     * @return 视图
      */
     @GetMapping("/index")
     public ModelAndView index(@RequestParam(value = "productId", required = false) String productId,
@@ -123,10 +118,9 @@ public class SellerProductionController {
 
     /**
      * 商品信息更新与新增
-     * @param form
-     * @param bindingResult
-     * @param map
-     * @return
+     * @param form 表单
+     * @param bindingResult 数据验证
+     * @return 视图
      */
     @PostMapping("/save")
     //@CachePut(cacheNames = "product", key = "123")

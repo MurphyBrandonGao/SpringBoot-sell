@@ -31,8 +31,7 @@ public class SellerCategoryController {
 
     /**
      * 类目列表
-     * @param map
-     * @return
+     * @return 视图
      */
     @GetMapping("/list")
     public ModelAndView list(Map<String, Object> map) {
@@ -43,16 +42,15 @@ public class SellerCategoryController {
 
     /**
      * 类目展示（更新/新增）
-     * @param categoryId
-     * @param map
-     * @return
+     * @param categoryId 类目id
+     * @return 视图
      */
     @GetMapping("/index")
     public ModelAndView index(@RequestParam(value = "categoryId", required = false) Integer categoryId,
                               Map<String, Object> map) {
         if (categoryId != null) {
             ProductCategory productCategory = categoryService.findOne(categoryId);
-            map.put("productCategory", productCategory);
+            map.put("category", productCategory);
         }
 
         return new ModelAndView("category/index", map);
@@ -60,10 +58,9 @@ public class SellerCategoryController {
 
     /**
      * 类目更新/新增
-     * @param form
-     * @param bindingResult
-     * @param map
-     * @return
+     * @param form 表单
+     * @param bindingResult 数据验证
+     * @return 视图
      */
     @GetMapping("/save")
     public ModelAndView save(@Valid CategoryForm form,

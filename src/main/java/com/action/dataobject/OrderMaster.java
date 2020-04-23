@@ -52,7 +52,4 @@ public class OrderMaster {
 
     /**更新时间*/
     private Date updateTime;
-
-    @Transient
-    private List<OrderDetail> orderDetailList;
 }

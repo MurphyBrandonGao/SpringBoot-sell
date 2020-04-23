@@ -23,7 +23,7 @@ public class ProjectUrlConfig {
     public String wechatOpenAuthorize;
 
     /**
-     * 点餐系统
+     * 点餐系统url
      */
     public String sell;
 }
