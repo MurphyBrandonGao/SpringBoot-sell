@@ -73,8 +73,9 @@ public class WechatController {
     }
 
     @GetMapping("/qrUserInfo")
-    public String qrUserInfo(@RequestParam("code") String code,
-                             @RequestParam("state") String returnUrl) {
+    public String qrUserInfo(@RequestParam("code") String code
+                             // @RequestParam("state") String returnUrl
+                             ) {
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = new WxMpOAuth2AccessToken();
         try {
             wxMpOAuth2AccessToken = wxOpenService.oauth2getAccessToken(code);
@@ -84,6 +85,8 @@ public class WechatController {
         }
         log.info("wxMpOAuth2AccessToken={}", JsonUtil.toJson(wxMpOAuth2AccessToken));
         String openId = wxMpOAuth2AccessToken.getOpenId();
-        return "redirect:" + returnUrl + "?openid=" + openId;
+        log.info("openid:{}", openId);
+        return "redirect:http://brandon.natapp1.cc/sell/seller/login" //"redirect:" + returnUrl
+                + "?openid=" + openId;
     }
 }

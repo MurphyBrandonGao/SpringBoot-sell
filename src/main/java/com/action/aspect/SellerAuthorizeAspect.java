@@ -1,4 +1,3 @@
-/*
 package com.action.aspect;
 
 import com.action.constant.CookieConstant;
@@ -18,13 +17,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-
-*/
 /**
  * 使用AOP进行身份验证
  * @author Dell
  * @create 2019-08-13 10:00
- *//*
+ */
 
 @Aspect
 @Component
@@ -58,4 +55,3 @@ public class SellerAuthorizeAspect {
         }
     }
 }
-*/

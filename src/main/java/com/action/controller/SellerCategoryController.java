@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,7 +63,7 @@ public class SellerCategoryController {
      * @param bindingResult 数据验证
      * @return 视图
      */
-    @GetMapping("/save")
+    @PostMapping("/save")
     public ModelAndView save(@Valid CategoryForm form,
                              BindingResult bindingResult,
                              Map<String, Object> map) {

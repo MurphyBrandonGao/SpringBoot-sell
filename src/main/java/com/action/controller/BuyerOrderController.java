@@ -48,6 +48,7 @@ public class BuyerOrderController {
             throw new SellException(ResultEnum.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
         }
 
+        orderForm.setOpenid("oTgZpwVwNuZIUIERCFbEHcF2esDw");
         OrderDTO orderDTO = OrderForm2OrderDTOConverter.convert(orderForm);
         // 判断orderDTO的购物车是否为空
         if (CollectionUtils.isEmpty(orderDTO.getOrderDetailList())) {
@@ -55,6 +56,9 @@ public class BuyerOrderController {
             throw new SellException(ResultEnum.CART_EMPTY);
         }
 
+        if (orderDTO.getBuyerOpenid() == null) {
+            orderDTO.setBuyerOpenid("oTgZpwVwNuZIUIERCFbEHcF2esDw");
+        }
         OrderDTO createResult = orderService.create(orderDTO);
 
         Map<String, String> map = new HashMap<>();

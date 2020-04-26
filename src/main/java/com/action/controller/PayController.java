@@ -6,11 +6,14 @@ import com.action.exception.SellException;
 import com.action.service.OrderService;
 import com.action.service.PayService;
 import com.lly835.bestpay.model.PayResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Map;
 
 /**
@@ -20,6 +23,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/pay")
+@Slf4j
 public class PayController {
 
     @Autowired
@@ -42,7 +46,8 @@ public class PayController {
         PayResponse payResponse = payService.create(orderDTO);
 
         map.put("payResponse", payResponse);
-        map.put("returnUrl", returnUrl);
+        log.info("returnUrl={}", URLDecoder.decode(returnUrl));
+        map.put("returnUrl", URLDecoder.decode(returnUrl));
         return new ModelAndView("pay/create", map);
     }
 

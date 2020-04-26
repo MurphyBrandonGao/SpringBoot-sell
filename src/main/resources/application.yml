@@ -18,15 +18,15 @@ server:
 wechat:
 #  mpAppId: wx0ad8f38396f16954
 #  mpAppSecret: 63ae22c3c1d915a9dcb6c02b0e0b5985 #测试号appId,appSecret
-  mpAppId: wxe007de634e454627 #wxd898fcb01713c658
-  mpAppSecret: ed8bcd6a5acb51382cb967f1cf19ac89 #29d8a650db31472aa87800e3b0d739f2 #借用号appId,appSecret
+  mpAppId: wxd898fcb01713c658 #wxd898fcb01713c658 wxe007de634e454627
+#  mpAppSecret: ed8bcd6a5acb51382cb967f1cf19ac89 #29d8a650db31472aa87800e3b0d739f2 #借用号appId,appSecret
 #  openAppId: wx6ad144e54af67d87
 #  openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e #开放平台测试号appId,appSecret
   openAppId: wx6ad144e54af67d87
   openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e #借用帐号appId,appSecret
   mchId: 1483469312 #1409146202 1483469312
-  mchKey: C5245D70627C1F8E9964D494B0735025 #C976503d34ca432c601361f969fd8d85 C5245D70627C1F8E9964D494B0735025
-  keyPath: C:/Users/Administrator/Downloads/h5.p12
+  mchKey: 098F6BCD4621D373CADE4E832627B4F6 #C976503d34ca432c601361f969fd8d85 C5245D70627C1F8E9964D494B0735025
+  keyPath: C:\Users\dell\Downloads\h5.p12
   notifyUrl: http://brandon.natapp1.cc/notify
   templateId:
     orderStatus: GoCullfix05R-rCibvoyI87ZUg50cyieKA5AyX7pPzo
